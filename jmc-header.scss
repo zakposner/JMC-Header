@@ -1,4 +1,320 @@
 /* ====================
+    Header
+==================== */
+
+#shopify-section-header {
+  
+  .menu-left-bottom-border {
+    border-bottom:1px solid #d5dadc;
+  }
+}
+
+.main-header-wrap {
+  table-layout:auto;
+  height:71px;
+  
+  .header-content {
+        
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+    width:auto;
+    min-width:60px;
+   
+  }
+  
+  
+  .logo-wrapper {
+    width:10%;
+    overflow:visible;
+    
+
+    
+    #main-logo {
+      display:none;
+    }
+    
+    img#full-logo {
+      display:block;
+      max-width:10000% !important;
+      max-height:51px;
+      
+    }
+  }
+  
+  .main-nav-wrapper {
+
+   width:100%;
+    
+    ul {
+      text-align:center;
+    }
+  }
+  
+  ul.cart-link {
+    text-align:right;
+    
+  white-space:nowrap;
+  
+    li {
+      margin-left: 15px;
+    }
+
+  }
+  
+  a {
+    color:{{ settings.header-text-colour }} !important;
+    letter-spacing:1px;
+    
+    &:hover {
+      color:$jmc-purple !important;
+      
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #main-logo {
+      display:inline !important;
+    }
+    
+    img#full-logo {
+      display:none !important;
+
+
+      
+    }
+
+}
+
+
+@media screen and (max-width: 995px) {
+
+  .logo-wrapper {
+    display:block !important;
+  @include fill-parent-abs;
+
+    left:220px;
+    right:220px;
+    width:auto !important;
+    
+  
+    
+    #site-title {
+      text-align:center;
+    }
+  }
+ 
+  
+  #top-search-wrapper {
+    display:none !important;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .logo-wrapper {
+    display:block !important;
+  @include fill-parent-abs;
+
+    left:60px;
+    right:60px;
+    width:auto !important;
+    
+    #site-title {
+      text-align:center;
+    }
+  }
+  
+}
+
+
+
+#main-navigation-wrapper {
+  background:transparent;
+  ul.nav {
+  
+    white-space:nowrap;
+    
+    li {
+      
+      a {
+        
+        //text-transform:none;
+      }
+    }
+  }
+}
+
+/* Fixed-position header */
+#jmc-header-wrap {
+  
+  &.not-fixed {
+  
+    .fixed-header-spacer {
+      display:none !important;
+    }
+    
+    #jmc-header {
+      position:relative;
+    }
+  }
+
+}
+
+#jmc-header {
+  display: block;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000000;
+  background: #FFFFFF;
+  
+  
+  #top-search-wrapper {
+    background:$jmc-light-gray;
+    padding:0;
+    position:absolute;
+    width:100%;
+    
+    &:before {
+      content:'';
+      display:block;
+      position:absolute;
+      height:4px;
+      bottom:0;
+      z-index:-1;
+      box-shadow:0px 0px 4px 4px rgba( 0,0,0,0.4);
+      width:100%;
+      background:transparent;
+    }
+    
+  
+    .top-search {
+
+      
+      #search_text {
+        background:transparent;
+        border:0;
+        outline:none;
+        -webkit-appearance:none;
+      border-bottom:2px solid #CCC;
+        padding:4px 0;
+        font-size:20px;
+        color:#000000;
+        width:100%;
+        max-width:800px;
+
+        
+       
+      }
+      
+      
+    }
+  }
+}
+
+
+
+/* Fix padding & alignment of nav items */
+#site-header {
+  padding: 0 !important;
+}
+#site-title {
+  padding: 10px 0 !important;
+  position: relative;
+  top: -1px;
+}
+
+/* Spacing between site icons */
+
+
+/* Spacer for fixed position header */
+.fixed-header-spacer {
+  height: 71px;
+  min-height: 71px;
+  max-height: 71px;
+}
+#top-search-spacer {
+  height:77px;
+  width:100%;
+}
+
+.mobile-header-wrap {
+  padding:0 !important;
+}
+
+#site-title {
+  margin-bottom:0 !important;
+}
+  
+
+
+/* ====================
+    Mobile Menu Slideout
+==================== */
+
+nav#menu {
+  
+  border-right:1px solid #d5dadc;
+  text-transform:uppercase !important;
+
+  &:not(.slideout-panel-hidden) {
+    display:block !important;
+  }
+  
+  li.mobile-search {
+    padding:0;
+    background:transparent;
+    border-bottom:1px solid #ebebeb;
+  
+    form#search {
+    
+      padding:0;
+      
+      #search_text {
+      
+        //height:75px;
+        padding:25px 15px;
+        line-height:25px;
+        box-sizing:border-box;
+        background:$jmc-light-gray;
+        outline:none !important;
+        -webkit-appearance:none;
+
+        display:block;
+  
+        border-right:1px solid #ebebeb;
+        width:251px;
+        
+      }
+    }
+  }
+  
+  /*
+  li {
+    
+    &.nav-margin {
+      margin-top:3em;
+      
+      a {
+        border-top:1px solid #ebebeb;
+      }
+    }
+  }
+  */
+}
+
+#slideout-overlay {
+      background-color: rgba(0,0,0,0.7) !important;
+}
+
+.mobile-menu--wrapper .mobile-menu-right {
+  width: initial !important;
+    border-left: 300px solid transparent !important;
+}
+
+/* ====================
     Cart Slideout
 ==================== */
 
