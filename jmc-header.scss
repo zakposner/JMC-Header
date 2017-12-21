@@ -1,0 +1,128 @@
+/* ====================
+    Cart Slideout
+==================== */
+
+.slideout-menu {
+	top:71px;
+  width:300px !important;
+}
+
+.jmc-cart-drawer-close {
+	height: 50px;
+  	background-color: $jmc-light-gray;
+  
+  	.sidr-close-icon {
+  		background-color: $jmc-white !important;
+      	height: 50px !important;
+      	width: 50px !important;
+      	top: 0 !important;
+      	left: 0 !important;
+      
+      	> .fa-times {
+        	position: relative;
+          	top: 11px !important;
+        }
+  	}
+}
+
+
+.slide-checkout-buttons {
+  
+  a.btn {
+    width: 80%;
+  }
+
+}
+
+.jmc-cart-preview {
+	// margin-top: 50px;
+  	max-height: 62%;
+  	overflow: auto;
+  	border-top: 1px solid #E0E0E0;
+  	border-bottom: 1px solid #E0E0E0;
+}
+@media only screen and (max-width: 768px) {
+  	.jmc-cart-preview {
+		max-height: 50%;  
+  	}
+}
+@media only screen and (max-width: 400px) {
+  	.jmc-cart-preview {
+		max-height: 40%  
+  	}
+}
+
+.jmc-cart-preview-item {
+	width: 100%;
+  	min-height: 100px; // FIXME
+  	display: block;
+  	padding-top: 13px;
+  	position: relative;
+}
+.jmc-cart-preview-item:not(:first-child) {
+	border-top: 1px solid #E0E0E0;
+}
+
+.jmc-cart-preview-image {
+	width: 70px !important;
+  	max-height: 70px !important;
+}
+
+
+.jmc-cart-preview-left,
+.jmc-cart-preview-right {
+	height: 70px;
+}
+
+.jmc-cart-thumb {
+	max-width: 75px;
+}
+
+.jmc-cart-preview-title {
+	text-align: left;
+  	padding: 2px 10px 2px 2px;
+  	margin-bottom: 5px;
+  
+  	h5 {
+    	margin-top: 0;
+      	margin-bottom: 0;
+      	font-size: 15px !important;
+    }  		
+}
+
+.jmc-cart-preview-info {
+	display: flex;
+  	flex-direction: row;
+  	justify-content: space-between;
+  	align-items: center;
+  	align-content: center;  	
+}
+
+.slide-checkout-buttons {
+	margin-top: 0 !important;
+}
+
+.jmc-quantity-picker {
+	width: 25%
+}
+
+.cart-menu-close {
+	right: initial !important;
+  	left: 15px !important;
+}
+
+.jmc-cart-preview-remove {
+	position: absolute;
+  	cursor: pointer;
+  	top: 15px;
+  	right: 15px;
+  	@include transition;
+  
+  	&:hover {
+    	color: $jmc-purple
+    }
+}
+
+.jmc-cart-preview-empty {
+	padding: 50px 0;
+}

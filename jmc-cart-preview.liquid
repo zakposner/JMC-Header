@@ -1,0 +1,34 @@
+<div class="jmc-cart-preview">
+  	
+  	{% comment %}
+	{% for item in cart.items %}
+  		<div class="jmc-cart-preview-item" data-product-id="{{item.product.id}}">
+          
+          	<!-- Item Image Column -->
+  			<div class="col-xs-4 jmc-cart-preview-left">
+                <a class="jmc-cart-thumb" href="{{item.product.url}}" title="View {{item.title}} Page">
+                    <img src="{{ item | img_url: '70x70' }}" alt="{{ item.title | escape }}" />
+                </a>
+            </div>
+          
+          	<!-- Item Info Column -->
+            <div class="col-xs-8 jmc-cart-preview-right jmc-flex-col">
+              	<div class="jmc-cart-preview-title">
+                  <a href="{{item.url}}" title="View {{item.title | escape }}"><h5>{{ item.title }}</h5></a>
+              	</div>
+              	<div class="jmc-cart-preview-info">
+                  	<div>
+                      	<span class="money">{{ item.price | money }} <strong>x{{item.quantity}}</strong></span>
+                  	</div>
+                  	<div>
+                      	<span class="money">{{item.line_price | money }}</span>
+                  	</div>
+              	</div>
+            </div>
+          
+  		</div>
+  	{% endfor %}
+  	{% endcomment %}
+  
+</div>
+

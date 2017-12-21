@@ -1,0 +1,101 @@
+<nav id="jmc-mobile-menu" class="mobile-menu--wrapper slideout-panel-hidden">
+	{% assign root_list = linklists[section.settings.main_linklist] %}
+	<a href="#sidr" class="slide-menu sidr-close-icon mobile-menu-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+	<ul class="mobile-menu mobile-menu-main" id="mobile-menu--{{ root_list.handle }}">
+		<li class="mobile-search">
+
+			<form id="search" action="/search">
+			<div id="search-wrapper">
+				<input id="search_text" name="q" type="text" size="20" onblur="if(this.value=='')this.value=this.defaultValue;" onfocus="if(this.value==this.defaultValue)this.value='';" value="{{ 'layout.header.search_box_text' | t }}"/>
+			</div>
+			</form>
+
+		</li>
+		{% for link in root_list.links %}
+			<li>
+				<a href="{{ link.url }}">{{ link.title | escape }}</a>
+				{% if linklists[link.handle].links != blank %}
+					<a href="#" class="mobile-menu-sub mobile-menu-right mobile-menu-link" data-link="mobile-menu--{{ link.handle }}">
+						<i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</a>
+				{% endif %}
+			</li>
+		{% endfor %}
+		{% if shop.customer_accounts_enabled %}
+			{% if customer %}
+				<li class="mobile-customer-link"><a href="/account">{{ 'customer.account.title' | t }}</a></li>
+				<li class="mobile-customer-link">{{ 'layout.customer.log_out' | t | customer_logout_link }}</li>
+			{% else %}
+				<li class="mobile-customer-link">{{ 'layout.customer.log_in' | t | customer_login_link }}</li>
+				{% if shop.customer_accounts_optional %}
+					<li class="mobile-customer-link">{{ 'customer.register.title' | t | customer_register_link }}</li>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+
+		{% if settings.show_multiple_currencies %}
+		<li>
+			<a href="#" class="mobile-menu-link mobile-menu-sub mobile-menu-link-currency" data-link="mobile-menu-currency">{{ 'layout.cart.currency' | t }}</a>
+		</li>
+		{% endif %}
+	</ul>
+
+	{% for link in root_list.links %}
+		{% if linklists[link.handle].links != blank %}
+			<ul class="mobile-menu mobile-menu-child mobile-menu-hidden" id="mobile-menu--{{ link.handle }}">
+				<li>
+					<a href="#" class="mobile-menu-back mobile-menu-link" data-link="mobile-menu--{{ root_list.handle }}">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						<div class="mobile-menu-title">{{ link.title }}</div>
+					</a>
+				</li>
+				{% for child_link in linklists[link.handle].links %}
+					<li>
+						<a href="{{ child_link.url }}">{{ child_link.title | escape }}</a>
+						{% if linklists[child_link.handle].links != blank %}
+							<a href="#" class="mobile-menu-sub mobile-menu-right mobile-menu-link" data-link="mobile-menu--{{ child_link.handle }}">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+
+			{% for child_link in linklists[link.handle].links %}
+				<ul class="mobile-menu mobile-menu-grandchild mobile-menu-hidden" id="mobile-menu--{{ child_link.handle }}">
+					<li>
+						<a href="#" class="mobile-menu-back mobile-menu-link" data-link="mobile-menu--{{ link.handle }}">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+							<div class="mobile-menu-title">{{ child_link.title }}</div>
+						</a>
+					</li>
+					{% for grand_child_link in linklists[child_link.handle].links %}
+						<li>{{ grand_child_link.title | link_to: grand_child_link.url }}</li>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+
+	{% if settings.show_multiple_currencies %}
+	<ul class="mobile-menu mobile-menu-child mobile-menu-hidden" id="mobile-menu-currency">
+		<li>
+			<a href="#" class="mobile-menu-back mobile-menu-link" data-link="mobile-menu--{{ root_list.handle }}">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				<div class="mobile-menu-title">{{ 'layout.cart.currency' | t }}</div>
+			</a>
+		</li>
+		{% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+		{% assign supported_codes = settings.supported_currencies | split: ' ' %}
+		<li>
+			{% for code in supported_codes %}
+				{% if codes contains code %}
+					<a href="#" class="mobile-menu-currency-link{% if code == shop.currency %} mobile-menu-currency-selected{% endif %}" data-code="{{ code }}">
+						{{ code }}
+					</a>
+				{% endif %}
+			{% endfor %}
+		</li>
+	</ul>
+	{% endif %}
+</nav>
